@@ -1,0 +1,21 @@
+[
+    {
+        "fileHash": "sha256-e6dead630c0f6b1e001086b5868cefd611b12d2919eb20044bf95fc4bc46299e",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/try3341233412/TestPlugins",
+        "fileSize": 11535,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "try3341233412"
+        ],
+        "tvTypes": [
+            "Movie"
+        ],
+        "version": 3,
+        "internalName": "ExampleProvider",
+        "description": "YouTube search and playback",
+        "url": "https://raw.githubusercontent.com/try3341233412/TestPlugins/builds/ExampleProvider.cs3",
+        "name": "ExampleProvider"
+    }
+]
