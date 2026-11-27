@@ -1,0 +1,8 @@
+{
+  "name": "My YouTube Repo",
+  "description": "YouTube source plugin",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/try3341233412/TestPlugins/builds/plugins.json"
+  ]
+}
