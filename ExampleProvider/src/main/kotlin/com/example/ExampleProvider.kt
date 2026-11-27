@@ -42,7 +42,7 @@ class ExampleProvider : MainAPI() {
     )
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val idMatch = Regex("(?:v=|youtu\\.be/|shorts/)([A-Za-z0-9_-]{11})").find(query)
+        val idMatch = Regex("(?:v=|youtu\\.be/|shorts/|live/|embed/)([A-Za-z0-9_-]{11})").find(query)
         if (idMatch != null) {
             val id = idMatch.groupValues[1]
             return listOf(
