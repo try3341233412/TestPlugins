@@ -9,7 +9,7 @@ class ExampleProvider : MainAPI() {
     override var name = "YouTube"
     override val hasMainPage = false
     override var lang = "en"
-    override val supportedTypes = setOf(TvType.Others)
+    override val supportedTypes = setOf(TvType.Movie)
 
     // Tried in order; the first one that answers is used
     private val instances = listOf(
@@ -42,6 +42,16 @@ class ExampleProvider : MainAPI() {
     )
 
     override suspend fun search(query: String): List<SearchResponse> {
+        val idMatch = Regex("(?:v=|youtu\\.be/|shorts/)([A-Za-z0-9_-]{11})").find(query)
+        if (idMatch != null) {
+            val id = idMatch.groupValues[1]
+            return listOf(
+                newMovieSearchResponse("YouTube video", "$mainUrl/watch?v=$id", TvType.Movie) {
+                    this.posterUrl = "https://i.ytimg.com/vi/$id/hqdefault.jpg"
+                }
+            )
+        }
+
         val q = URLEncoder.encode(query, "UTF-8")
         for (api in instances) {
             val items = try {
@@ -59,7 +69,7 @@ class ExampleProvider : MainAPI() {
                     newMovieSearchResponse(
                         item.title ?: "Video",
                         "$mainUrl/watch?v=$id",
-                        TvType.Others
+                        TvType.Movie
                     ) { this.posterUrl = item.thumbnail }
                 }
         }
@@ -77,7 +87,7 @@ class ExampleProvider : MainAPI() {
             }
             if (info?.title != null) break
         }
-        return newMovieLoadResponse(info?.title ?: "Video", url, TvType.Others, url) {
+        return newMovieLoadResponse(info?.title ?: "Video", url, TvType.Movie, url) {
             this.posterUrl = info?.thumbnailUrl
             this.plot = info?.description
         }
